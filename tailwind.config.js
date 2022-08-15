@@ -11,6 +11,16 @@ module.exports = {
       borderRadius: {
         'custom-large': '32px',
       },
+      colors: {
+        'green-jds': '#009d57',
+        'yellow-jds': '#ffcc29',
+        'blue-jds': '#00b8f1'
+      },
+      borderColor: {
+        'green-jds': '#009d57',
+        'yellow-jds': '#ffcc29',
+        'blue-jds': '#00b8f1'
+      },
       textColor: {
         'green-jds': '#009d57',
         'yellow-jds': '#ffcc29',

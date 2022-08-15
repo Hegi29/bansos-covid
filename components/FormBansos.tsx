@@ -32,6 +32,10 @@ const FormBansos = () => {
   const [submitedData, setSubmitedData] = useState(false);
 
   useEffect(() => {
+    console.log('errors', errors)
+  }, [errors])
+
+  useEffect(() => {
     fetch(`http://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`)
       .then(response => response.json())
       .then(provinces => setProvinces(provinces));
@@ -157,6 +161,11 @@ const FormBansos = () => {
         </div>
         <div className="md:w-2/3">
           <input {...register('nama')} className={`appearance-none border-2 ${errors?.nama ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="nama" type="text" />
+          {errors.nama &&
+            <small className="text-red-500">
+              {errors?.nama?.message}
+            </small>
+          }
         </div>
       </div>
       <div className="md:flex md:items-center mb-6">
@@ -167,6 +176,11 @@ const FormBansos = () => {
         </div>
         <div className="md:w-2/3">
           <input {...register('nik')} className={`appearance-none border-2 ${errors?.nik ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="nik" type="text" />
+          {errors.nik &&
+            <small className="text-red-500">
+              {errors?.nik?.message}
+            </small>
+          }
         </div>
       </div>
       <div className="md:flex md:items-center mb-6">
@@ -177,6 +191,11 @@ const FormBansos = () => {
         </div>
         <div className="md:w-2/3">
           <input {...register('noKK')} className={`appearance-none border-2 ${errors?.noKK ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="no-kk" type="text" />
+          {errors.noKK &&
+            <small className="text-red-500">
+              {errors?.noKK?.message}
+            </small>
+          }
         </div>
       </div>
       <div className="md:flex md:items-center mb-6">
@@ -187,6 +206,11 @@ const FormBansos = () => {
         </div>
         <div className="md:w-1/3">
           <input {...register('fotoKTP')} accept="image/jpg, image/jpeg, image/png" className={`appearance-none border-2 ${errors?.fotoKTP ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="foto-ktp" type="file" />
+          {errors.fotoKTP &&
+            <small className="text-red-500">
+              {errors?.fotoKTP?.message}
+            </small>
+          }
         </div>
       </div>
       <div className="md:flex md:items-center mb-6">
@@ -197,6 +221,11 @@ const FormBansos = () => {
         </div>
         <div className="md:w-1/3">
           <input {...register('fotoKK')} accept="image/jpg, image/jpeg, image/png" className={`appearance-none border-2 ${errors?.fotoKK ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="foto-kk" type="file" />
+          {errors.fotoKK &&
+            <small className="text-red-500">
+              {errors?.fotoKK?.message}
+            </small>
+          }
         </div>
       </div>
       <div className="md:flex md:items-center mb-6">
@@ -207,6 +236,11 @@ const FormBansos = () => {
         </div>
         <div className="md:w-1/3">
           <input {...register('umur')} className={`appearance-none border-2 ${errors?.umur ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="umur" type="number" min={1} />
+          {errors.umur &&
+            <small className="text-red-500">
+              {errors?.umur?.message}
+            </small>
+          }
         </div>
       </div>
       <div className="md:flex md:items-center mb-6">
@@ -221,6 +255,11 @@ const FormBansos = () => {
             <option value="1">Laki-Laki</option>
             <option value="2">Perempuan</option>
           </select>
+          {errors.jenisKelamin &&
+            <small className="text-red-500">
+              {errors?.jenisKelamin?.message}
+            </small>
+          }
         </div>
       </div>
       <div className="md:flex md:items-center mb-6">
@@ -238,6 +277,11 @@ const FormBansos = () => {
               );
             })}
           </select>
+          {errors.provinsi &&
+            <small className="text-red-500">
+              {errors?.provinsi?.message}
+            </small>
+          }
         </div>
       </div>
       <div className="md:flex md:items-center mb-6">
@@ -255,6 +299,11 @@ const FormBansos = () => {
               );
             })}
           </select>
+          {errors.kabupatenKota &&
+            <small className="text-red-500">
+              {errors?.kabupatenKota?.message}
+            </small>
+          }
         </div>
       </div>
       <div className="md:flex md:items-center mb-6">
@@ -272,6 +321,11 @@ const FormBansos = () => {
               );
             })}
           </select>
+          {errors.kecamatan &&
+            <small className="text-red-500">
+              {errors?.kecamatan?.message}
+            </small>
+          }
         </div>
       </div>
       <div className="md:flex md:items-center mb-6">
@@ -289,6 +343,11 @@ const FormBansos = () => {
               );
             })}
           </select>
+          {errors.kelurahanDesa &&
+            <small className="text-red-500">
+              {errors?.kelurahanDesa?.message}
+            </small>
+          }
         </div>
       </div>
       <div className="md:flex md:items-center mb-6">
@@ -299,6 +358,11 @@ const FormBansos = () => {
         </div>
         <div className="md:w-2/3">
           <textarea {...register('alamat')} className={`appearance-none border-2 ${errors?.alamat ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="alamat" maxLength={255} />
+          {errors.alamat &&
+            <small className="text-red-500">
+              {errors?.alamat?.message}
+            </small>
+          }
         </div>
       </div>
       <div className="md:flex md:items-center mb-6">
@@ -309,6 +373,11 @@ const FormBansos = () => {
         </div>
         <div className="md:w-1/3">
           <input {...register('rt')} className={`appearance-none border-2 ${errors?.rt ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="rt" />
+          {errors.rt &&
+            <small className="text-red-500">
+              {errors?.rt?.message}
+            </small>
+          }
         </div>
       </div>
       <div className="md:flex md:items-center mb-6">
@@ -319,6 +388,11 @@ const FormBansos = () => {
         </div>
         <div className="md:w-1/3">
           <input {...register('rw')} className={`appearance-none border-2 ${errors?.rw ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="rw" />
+          {errors.rw &&
+            <small className="text-red-500">
+              {errors?.rw?.message}
+            </small>
+          }
         </div>
       </div>
       <div className="md:flex md:items-center mb-6">
@@ -329,6 +403,11 @@ const FormBansos = () => {
         </div>
         <div className="md:w-1/3">
           <input {...register('penghasilanSebelum')} className={`appearance-none border-2 ${errors?.penghasilanSebelum ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="penghasilan-sebelum" type="number" min={0} />
+          {errors.penghasilanSebelum &&
+            <small className="text-red-500">
+              {errors?.penghasilanSebelum?.message}
+            </small>
+          }
         </div>
       </div>
       <div className="md:flex md:items-center mb-6">
@@ -339,6 +418,11 @@ const FormBansos = () => {
         </div>
         <div className="md:w-1/3">
           <input {...register('penghasilanSesudah')} className={`appearance-none border-2 ${errors?.penghasilanSesudah ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="penghasilan-sesudah" type="number" min={0} />
+          {errors.penghasilanSesudah &&
+            <small className="text-red-500">
+              {errors?.penghasilanSesudah?.message}
+            </small>
+          }
         </div>
       </div>
       <div className="md:flex md:items-center mb-6">
@@ -355,7 +439,20 @@ const FormBansos = () => {
             <option value="Tergolong Fakir / Miskin semenjak sebelum Covid-19">Tergolong Fakir / Miskin semenjak sebelum Covid-19</option>
             <option value="Lainnya">Lainnya</option>
           </select>
-          {showOtherReason && <input {...register('alasanLain')} className={`appearance-none mt-4 border-2 ${errors?.alasanLain ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="alasan-lain" />}
+          {errors.alasan &&
+            <small className="text-red-500">
+              {errors?.alasan?.message}
+            </small>
+          }
+          {showOtherReason &&
+            <>
+              <input {...register('alasanLain')} className={`appearance-none mt-4 border-2 ${errors?.alasanLain ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="alasan-lain" />
+              {errors.alasanLain &&
+                <small className="text-red-500">
+                  {errors?.alasanLain?.message}
+                </small>
+              }
+            </>}
         </div>
       </div>
       <hr />
