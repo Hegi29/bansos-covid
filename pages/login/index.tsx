@@ -16,7 +16,6 @@ const Login = () => {
       <Head>
         <title>Login | {TITLE_APP}</title>
         <meta name="description" content={META_DESC} />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="min-h-screen flex justify-center items-center bg-blue-jds">
         <div className="p-10 mt-10 rounded-lg shadow-lg flex flex-col items-center bg-white">
