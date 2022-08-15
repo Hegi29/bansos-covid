@@ -163,7 +163,7 @@ const FormBansos = () => {
           <input {...register('nama')} className={`appearance-none border-2 ${errors?.nama ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="nama" type="text" />
           {errors.nama &&
             <small className="text-red-500">
-              {errors?.nama?.message}
+              {errors?.nama?.message as string}
             </small>
           }
         </div>
@@ -178,7 +178,7 @@ const FormBansos = () => {
           <input {...register('nik')} className={`appearance-none border-2 ${errors?.nik ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="nik" type="text" />
           {errors.nik &&
             <small className="text-red-500">
-              {errors?.nik?.message}
+              {errors?.nik?.message as string}
             </small>
           }
         </div>
@@ -193,7 +193,7 @@ const FormBansos = () => {
           <input {...register('noKK')} className={`appearance-none border-2 ${errors?.noKK ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="no-kk" type="text" />
           {errors.noKK &&
             <small className="text-red-500">
-              {errors?.noKK?.message}
+              {errors?.noKK?.message as string}
             </small>
           }
         </div>
@@ -208,7 +208,7 @@ const FormBansos = () => {
           <input {...register('fotoKTP')} accept="image/jpg, image/jpeg, image/png" className={`appearance-none border-2 ${errors?.fotoKTP ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="foto-ktp" type="file" />
           {errors.fotoKTP &&
             <small className="text-red-500">
-              {errors?.fotoKTP?.message}
+              {errors?.fotoKTP?.message as string}
             </small>
           }
         </div>
@@ -223,7 +223,7 @@ const FormBansos = () => {
           <input {...register('fotoKK')} accept="image/jpg, image/jpeg, image/png" className={`appearance-none border-2 ${errors?.fotoKK ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="foto-kk" type="file" />
           {errors.fotoKK &&
             <small className="text-red-500">
-              {errors?.fotoKK?.message}
+              {errors?.fotoKK?.message as string}
             </small>
           }
         </div>
@@ -238,7 +238,7 @@ const FormBansos = () => {
           <input {...register('umur')} className={`appearance-none border-2 ${errors?.umur ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="umur" type="number" min={1} />
           {errors.umur &&
             <small className="text-red-500">
-              {errors?.umur?.message}
+              {errors?.umur?.message as string}
             </small>
           }
         </div>
@@ -252,12 +252,12 @@ const FormBansos = () => {
         <div className="md:w-1/3">
           <select {...register('jenisKelamin')} className={`appearance-none border-2 ${errors?.jenisKelamin ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white cursor-pointer`} id="jenis-kelamin">
             <option value="">-</option>
-            <option value="1">Laki-Laki</option>
-            <option value="2">Perempuan</option>
+            <option value="Laki-Laki">Laki-Laki</option>
+            <option value="Perempuan">Perempuan</option>
           </select>
           {errors.jenisKelamin &&
             <small className="text-red-500">
-              {errors?.jenisKelamin?.message}
+              {errors?.jenisKelamin?.message as string}
             </small>
           }
         </div>
@@ -279,7 +279,7 @@ const FormBansos = () => {
           </select>
           {errors.provinsi &&
             <small className="text-red-500">
-              {errors?.provinsi?.message}
+              {errors?.provinsi?.message as string}
             </small>
           }
         </div>
@@ -301,7 +301,7 @@ const FormBansos = () => {
           </select>
           {errors.kabupatenKota &&
             <small className="text-red-500">
-              {errors?.kabupatenKota?.message}
+              {errors?.kabupatenKota?.message as string}
             </small>
           }
         </div>
@@ -323,7 +323,7 @@ const FormBansos = () => {
           </select>
           {errors.kecamatan &&
             <small className="text-red-500">
-              {errors?.kecamatan?.message}
+              {errors?.kecamatan?.message as string}
             </small>
           }
         </div>
@@ -345,7 +345,7 @@ const FormBansos = () => {
           </select>
           {errors.kelurahanDesa &&
             <small className="text-red-500">
-              {errors?.kelurahanDesa?.message}
+              {errors?.kelurahanDesa?.message as string}
             </small>
           }
         </div>
@@ -360,7 +360,7 @@ const FormBansos = () => {
           <textarea {...register('alamat')} className={`appearance-none border-2 ${errors?.alamat ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="alamat" maxLength={255} />
           {errors.alamat &&
             <small className="text-red-500">
-              {errors?.alamat?.message}
+              {errors?.alamat?.message as string}
             </small>
           }
         </div>
@@ -375,7 +375,7 @@ const FormBansos = () => {
           <input {...register('rt')} className={`appearance-none border-2 ${errors?.rt ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="rt" />
           {errors.rt &&
             <small className="text-red-500">
-              {errors?.rt?.message}
+              {errors?.rt?.message as string}
             </small>
           }
         </div>
@@ -390,7 +390,7 @@ const FormBansos = () => {
           <input {...register('rw')} className={`appearance-none border-2 ${errors?.rw ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="rw" />
           {errors.rw &&
             <small className="text-red-500">
-              {errors?.rw?.message}
+              {errors?.rw?.message as string}
             </small>
           }
         </div>
@@ -405,7 +405,7 @@ const FormBansos = () => {
           <input {...register('penghasilanSebelum')} className={`appearance-none border-2 ${errors?.penghasilanSebelum ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="penghasilan-sebelum" type="number" min={0} />
           {errors.penghasilanSebelum &&
             <small className="text-red-500">
-              {errors?.penghasilanSebelum?.message}
+              {errors?.penghasilanSebelum?.message as string}
             </small>
           }
         </div>
@@ -420,7 +420,7 @@ const FormBansos = () => {
           <input {...register('penghasilanSesudah')} className={`appearance-none border-2 ${errors?.penghasilanSesudah ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="penghasilan-sesudah" type="number" min={0} />
           {errors.penghasilanSesudah &&
             <small className="text-red-500">
-              {errors?.penghasilanSesudah?.message}
+              {errors?.penghasilanSesudah?.message as string}
             </small>
           }
         </div>
@@ -441,7 +441,7 @@ const FormBansos = () => {
           </select>
           {errors.alasan &&
             <small className="text-red-500">
-              {errors?.alasan?.message}
+              {errors?.alasan?.message as string}
             </small>
           }
           {showOtherReason &&
@@ -449,7 +449,7 @@ const FormBansos = () => {
               <input {...register('alasanLain')} className={`appearance-none mt-4 border-2 ${errors?.alasanLain ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="alasan-lain" />
               {errors.alasanLain &&
                 <small className="text-red-500">
-                  {errors?.alasanLain?.message}
+                  {errors?.alasanLain?.message as string}
                 </small>
               }
             </>}
