@@ -1,5 +1,7 @@
 import * as yup from 'yup';
+
 import { Reason } from '../enum/reason';
+import { bytesToMegaBytes } from '../utils/bytesToMegaBytes';
 
 const schema = yup
   .object({
@@ -11,19 +13,32 @@ const schema = yup
       return false;
     })
       .test("fileSize", "File terlalu besar (maks. 2MB)", (file) => {
-        return file[0] && file[0].size <= 2000000;
+        if (file.length > 0) {
+          const size = bytesToMegaBytes(file[0].size);
+          return size < 2;
+        }
+
+        return false;
       }),
     fotoKK: yup.mixed().test("required", "Silakan unggah foto KK", (file) => {
       if (file[0]) return true;
       return false;
     })
       .test("fileSize", "File terlalu besar (maks. 2MB)", (file) => {
-        return file[0] && file[0].size <= 2000000;
+        if (file.length > 0) {
+          const size = bytesToMegaBytes(file[0].size);
+          return size < 2;
+        }
+
+        return false;
       }),
     umur: yup.number().transform((value) => {
       return isNaN(value) ? 0 : value
     }).test("required", "Silakan masukan umur", (value) => {
       if (value && value > 0) return true;
+      return false;
+    }).test("required", "Minimal umur adalah 25 tahun", (value) => {
+      if (value && value >= 25) return true;
       return false;
     }),
     jenisKelamin: yup.string().required("Silakan masukan jenis kelamin"),
@@ -31,7 +46,7 @@ const schema = yup
     kabupatenKota: yup.string().required("Silakan pilih kabupaten / kotamadya"),
     kecamatan: yup.string().required("Silakan pilih kecamatan"),
     kelurahanDesa: yup.string().required("Silakan pilih kelurahan / desa"),
-    alamat: yup.string().required("Silakan masukan alamat"),
+    alamat: yup.string().required("Silakan masukan alamat").max(255, "Melebihi batas maksimal 255 karakter"),
     rt: yup.string().required("Silakan masukan RT"),
     rw: yup.string().required("Silakan masukan RW"),
     penghasilanSebelum: yup.number().transform((value) => {

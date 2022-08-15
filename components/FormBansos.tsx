@@ -32,10 +32,6 @@ const FormBansos = () => {
   const [submitedData, setSubmitedData] = useState(false);
 
   useEffect(() => {
-    console.log('errors', errors)
-  }, [errors])
-
-  useEffect(() => {
     fetch(`http://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`)
       .then(response => response.json())
       .then(provinces => setProvinces(provinces));
@@ -205,7 +201,7 @@ const FormBansos = () => {
           </label>
         </div>
         <div className="md:w-1/3">
-          <input {...register('fotoKTP')} accept="image/jpg, image/jpeg, image/png" className={`appearance-none border-2 ${errors?.fotoKTP ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="foto-ktp" type="file" />
+          <input {...register('fotoKTP')} accept="image/jpg, image/jpeg, image/png, image/bmp" className={`appearance-none border-2 ${errors?.fotoKTP ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="foto-ktp" type="file" />
           {errors.fotoKTP &&
             <small className="text-red-500">
               {errors?.fotoKTP?.message as string}
@@ -220,7 +216,7 @@ const FormBansos = () => {
           </label>
         </div>
         <div className="md:w-1/3">
-          <input {...register('fotoKK')} accept="image/jpg, image/jpeg, image/png" className={`appearance-none border-2 ${errors?.fotoKK ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="foto-kk" type="file" />
+          <input {...register('fotoKK')} accept="image/jpg, image/jpeg, image/png, image/bmp" className={`appearance-none border-2 ${errors?.fotoKK ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="foto-kk" type="file" />
           {errors.fotoKK &&
             <small className="text-red-500">
               {errors?.fotoKK?.message as string}
@@ -252,7 +248,7 @@ const FormBansos = () => {
         <div className="md:w-1/3">
           <select {...register('jenisKelamin')} className={`appearance-none border-2 ${errors?.jenisKelamin ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white cursor-pointer`} id="jenis-kelamin">
             <option value="">-</option>
-            <option value="Laki-Laki">Laki-Laki</option>
+            <option value="Laki-laki">Laki-Laki</option>
             <option value="Perempuan">Perempuan</option>
           </select>
           {errors.jenisKelamin &&
