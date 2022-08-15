@@ -1,0 +1,35 @@
+/** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
+
+module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      borderRadius: {
+        'custom-large': '32px',
+      },
+      textColor: {
+        'green-jds': '#009d57',
+        'yellow-jds': '#ffcc29',
+        'blue-jds': '#00b8f1'
+      },
+      borderColor: {
+        'green-jds': '#009d57',
+        'yellow-jds': '#ffcc29',
+        'blue-jds': '#00b8f1'
+      },
+      accentColor: {
+        'green-jds': '#009d57',
+        'yellow-jds': '#ffcc29',
+        'blue-jds': '#00b8f1'
+      },
+      fontFamily: {
+        sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+      },
+    },
+  },
+  plugins: [],
+}

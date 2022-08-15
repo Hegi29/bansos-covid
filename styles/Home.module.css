@@ -1,5 +1,6 @@
 .container {
   padding: 0 2rem;
+  background-color: #a6e6fa;
 }
 
 .main {
@@ -10,13 +11,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #eaeaea;
+  /* border-radius: 0 42px; */
+  font-family: 'Nunito', sans-serif;
+  background-color: #a6e6fa;
 }
 
 .footer {
   display: flex;
   flex: 1;
   padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
 }
@@ -126,4 +130,13 @@
   .logo img {
     filter: invert(1);
   }
+}
+
+.required {
+  color: red;
+}
+
+.buttonAction {
+  text-align: center;
+  margin: 40px 0;
 }
