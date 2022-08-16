@@ -1,14 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { TITLE_FORM } from '../constants';
 import { Confirmation } from './Confirmation';
 import { schema } from './schema';
 import { Reason } from '../enum/reason';
+import { useDataStore } from '~/utils/.';
 import styles from '../styles/Home.module.css';
 
+const URL_POST_DATA = "http://localhost:3000/api/simulate-post-data";
+
 const FormBansos = () => {
+  const { addData } = useDataStore();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -23,8 +29,12 @@ const FormBansos = () => {
   const [disabled, setDisabled] = useState(true);
   const [provinces, setProvinces] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState("");
+  const [selectedProvinceName, setSelectedProvinceName] = useState("");
   const [selectedKabKota, setSelectedKabKota] = useState("");
+  const [selectedKabKotaName, setSelectedKabKotaName] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedDistrictName, setSelectedDistrictName] = useState("");
+  const [selectedVillageName, setSelectedVillageName] = useState("");
   const [cities, setCities] = useState([]);
   const [districts, setDistrict] = useState([]);
   const [villages, setVillages] = useState([]);
@@ -68,11 +78,14 @@ const FormBansos = () => {
 
   const handleChangeProvince = ({ target }: any) => {
     setCities([]);
+    setSelectedKabKota("");
     setDistrict([]);
     setVillages([]);
 
     if (target.value) {
-      setSelectedProvince(target.value);
+      const data = target.value.split('::');
+      setSelectedProvince(data[0]);
+      setSelectedProvinceName(data[1]);
       return;
     }
   }
@@ -82,7 +95,9 @@ const FormBansos = () => {
     setVillages([]);
 
     if (target.value) {
-      setSelectedKabKota(target.value);
+      const data = target.value.split('::');
+      setSelectedKabKota(data[0]);
+      setSelectedKabKotaName(data[1]);
       return;
     }
   }
@@ -91,7 +106,17 @@ const FormBansos = () => {
     setVillages([]);
 
     if (target.value) {
-      setSelectedDistrict(target.value);
+      const data = target.value.split('::');
+      setSelectedDistrict(data[0]);
+      setSelectedDistrictName(data[1]);
+      return;
+    }
+  }
+
+  const handleChangeVillage = ({ target }: any) => {
+    if (target.value) {
+      const data = target.value.split('::');
+      setSelectedVillageName(data[1]);
       return;
     }
   }
@@ -111,11 +136,13 @@ const FormBansos = () => {
 
   const onSubmitClicked = () => {
     if (isValid) {
-      setSubmitedData(true);
-
       const dataForm = getValues();
+      dataForm.namaProvinsi = selectedProvinceName;
+      dataForm.namaKabupatenKota = selectedKabKotaName;
+      dataForm.namaKecamatan = selectedDistrictName;
+      dataForm.namaKelurahanDesa = selectedVillageName;
 
-      fetch(`http://localhost:3000/api/simulate-post-data`, {
+      fetch(URL_POST_DATA, {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache',
@@ -128,10 +155,13 @@ const FormBansos = () => {
         body: JSON.stringify(dataForm)
       })
         .then(response => response.json())
-        .then((data) => {
-          const { isSuccess, message } = data;
+        .then(({ isSuccess, message }) => {
           if (isSuccess) {
-            // keluarin modal sukses
+            localStorage.setItem('X-Data-Form', JSON.stringify(dataForm));
+            addData(dataForm);
+            // setTimeout(() => {
+            setSubmitedData(true);
+            // }, 2000);
           }
 
           alert(message);
@@ -143,6 +173,10 @@ const FormBansos = () => {
     reset();
     setSubmitedData(false);
     setDisabled(false);
+  }
+
+  const preview = () => {
+    router.push('/preview');
   }
 
   return (
@@ -269,7 +303,7 @@ const FormBansos = () => {
             <option value="">-</option>
             {provinces && provinces.map((item: any) => {
               return (
-                <option key={item.id} value={item.id}>{item.name}</option>
+                <option key={item.id} value={`${item.id}::${item.name}`}>{item.name}</option>
               );
             })}
           </select>
@@ -291,7 +325,7 @@ const FormBansos = () => {
             <option value="">-</option>
             {cities && cities.map((item: any) => {
               return (
-                <option key={item.id} value={item.id}>{item.name}</option>
+                <option key={item.id} value={`${item.id}::${item.name}`}>{item.name}</option>
               );
             })}
           </select>
@@ -313,7 +347,7 @@ const FormBansos = () => {
             <option value="">-</option>
             {districts && districts.map((item: any) => {
               return (
-                <option key={item.id} value={item.id}>{item.name}</option>
+                <option key={item.id} value={`${item.id}::${item.name}`}>{item.name}</option>
               );
             })}
           </select>
@@ -331,11 +365,11 @@ const FormBansos = () => {
           </label>
         </div>
         <div className="md:w-2/3">
-          <select {...register('kelurahanDesa')} className={`appearance-none border-2 ${errors?.kelurahanDesa ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white cursor-pointer`} id="kelurahan-desa">
+          <select {...register('kelurahanDesa')} className={`appearance-none border-2 ${errors?.kelurahanDesa ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white cursor-pointer`} id="kelurahan-desa" onChange={(e) => handleChangeVillage(e)}>
             <option value="">-</option>
             {villages && villages.map((item: any) => {
               return (
-                <option key={item.id} value={item.id}>{item.name}</option>
+                <option key={item.id} value={`${item.id}::${item.name}`}>{item.name}</option>
               );
             })}
           </select>
@@ -456,7 +490,7 @@ const FormBansos = () => {
       <div className={styles.buttonAction}>
         {!submitedData && <button disabled={disabled} type='submit' className={`w-1/3 ${!disabled ? 'bg-blue-500 hover:bg-blue-700' : 'bg-gray-500 hover:bg-gray-700 cursor-not-allowed'} text-white font-bold py-2 px-4 rounded mr-3`}>Submit</button>}
         {submitedData && <button type='button' className="w-1/3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-3" onClick={resetForm}>Isi Lagi</button>}
-        {submitedData && <button type='button' className='w-1/3 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'>Preview</button>}
+        {submitedData && <button type='button' className='w-1/3 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' onClick={preview}>Preview</button>}
       </div>
     </form >
   );

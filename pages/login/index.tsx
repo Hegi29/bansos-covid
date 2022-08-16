@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-import { TITLE_APP, META_DESC } from '../../constants';
+import { TITLE_APP, META_DESC } from '~/constants/.';
 
 const Login = () => {
   const navigate = useRouter();
@@ -10,6 +11,10 @@ const Login = () => {
   const handleLogin = () => {
     navigate.push('/form');
   }
+
+  useEffect(() => {
+    localStorage.removeItem('X-Data-Form');
+  }, [])
 
   return (
     <>

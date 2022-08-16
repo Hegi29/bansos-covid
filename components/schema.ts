@@ -66,8 +66,8 @@ const schema = yup
       return false;
     }),
     alasanLain: yup.string().test("required", "Silakan masukan alasan lainnya", (reason, ctx) => {
-      if (reason && ctx.parent.alasan === Reason.Lainnya) return true;
-      return false;
+      if (ctx.parent.alasan === Reason.Lainnya && !reason) return false;
+      return true;
     })
   })
   .required();
