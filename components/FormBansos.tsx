@@ -9,7 +9,7 @@ import { schema } from './schema';
 import { validateMaxInputNumber } from '~/utils/.';
 import styles from '../styles/Home.module.css';
 
-const FormBansos = () => {
+const FormBansos = ({ openModal, setMessage }: any) => {
   const {
     register,
     handleSubmit,
@@ -81,7 +81,9 @@ const FormBansos = () => {
     selectedVillageName,
     setSubmitedData,
     reset,
-    setDisabled
+    setDisabled,
+    openModal,
+    setMessage
   );
 
   return (
@@ -307,7 +309,7 @@ const FormBansos = () => {
           </label>
         </div>
         <div className="md:w-1/3">
-          <input {...register('rt')} className={`appearance-none border-2 ${errors?.rt ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="rt" />
+          <input {...register('rt')} className={`appearance-none border-2 ${errors?.rt ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="rt" type="number" onInput={(e: any) => validateMaxInputNumber(e, 2)} />
           {errors.rt &&
             <small className="text-red-500">
               {errors?.rt?.message as string}
@@ -322,7 +324,7 @@ const FormBansos = () => {
           </label>
         </div>
         <div className="md:w-1/3">
-          <input {...register('rw')} className={`appearance-none border-2 ${errors?.rw ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="rw" />
+          <input {...register('rw')} className={`appearance-none border-2 ${errors?.rw ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="rw" type="number" onInput={(e: any) => validateMaxInputNumber(e, 2)} />
           {errors.rw &&
             <small className="text-red-500">
               {errors?.rw?.message as string}
@@ -396,7 +398,7 @@ const FormBansos = () => {
       <div className={styles.buttonAction}>
         {!submitedData && <button disabled={disabled} type='submit' className={`w-1/3 ${!disabled ? 'bg-blue-500 hover:bg-blue-700' : 'bg-gray-500 hover:bg-gray-700 cursor-not-allowed'} text-white font-bold py-2 px-4 rounded mr-3`}>Submit</button>}
         {submitedData && <button type='button' className="w-1/3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-3" onClick={resetForm}>Isi Lagi</button>}
-        {submitedData && <button type='button' className='w-1/3 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' onClick={preview}>Preview</button>}
+        {!submitedData && <button type='button' className='w-1/3 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' onClick={preview}>Preview</button>}
       </div>
     </form >
   );

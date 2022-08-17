@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useLogin } from 'hooks/useLogin';
+import { useLogin } from 'hooks/.';
 import { LoginLayout } from '~/components/.';
 
 const Login = () => {

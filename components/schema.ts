@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-import { Reason } from '../enum/reason';
+import { Reason } from '../enum/.';
 import { bytesToMegaBytes } from '../utils/.';
 
 const MAX_SIZE_FILE = 2; // MB
@@ -88,8 +88,12 @@ const schema = yup
     kecamatan: yup.string().required("Silakan pilih kecamatan"),
     kelurahanDesa: yup.string().required("Silakan pilih kelurahan / desa"),
     alamat: yup.string().required("Silakan masukan alamat").max(255, "Melebihi batas maksimal 255 karakter"),
-    rt: yup.string().required("Silakan masukan RT"),
-    rw: yup.string().required("Silakan masukan RW"),
+    rt: yup.number().transform((value) => {
+      return isNaN(value) ? 0 : value;
+    }).required("Silakan masukan RT"),
+    rw: yup.number().transform((value) => {
+      return isNaN(value) ? 0 : value;
+    }).required("Silakan masukan RW"),
     penghasilanSebelum: yup.number().transform((value) => {
       return isNaN(value) ? 0 : value;
     }).test("required", "Silakan masukan penghasilan sebelum pandemi", (value) => {

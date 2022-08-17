@@ -13,7 +13,9 @@ const usePostData = (
   selectedVillageName: string,
   setSubmitedData: any,
   reset: any,
-  setDisabled: any
+  setDisabled: (_arg: boolean) => void,
+  openModal: (_arg: boolean) => void,
+  setMessage: (_arg: string) => void
 ) => {
   const router = useRouter();
   const { addData } = useDataStore();
@@ -46,7 +48,8 @@ const usePostData = (
             setSubmitedData(true);
           }
 
-          alert(message);
+          setMessage(message);
+          openModal(true);
         });
     }
   }

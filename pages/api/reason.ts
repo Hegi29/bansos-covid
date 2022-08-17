@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { HttpStatus } from 'enum/httpStatus';
+import { HttpStatus } from 'enum/.';
 import { Response } from '~/types/.';
 import { enumReasonToArray } from '~/utils/.';
 

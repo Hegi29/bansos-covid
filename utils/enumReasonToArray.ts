@@ -1,4 +1,4 @@
-import { Reason } from 'enum/reason';
+import { Reason } from 'enum/.';
 
 const enumReasonToArray = () => {
   let id = 0;

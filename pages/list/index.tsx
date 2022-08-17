@@ -19,12 +19,10 @@ const List = () => {
   return (
     <MainLayout page="List">
       <div className="w-full p-6">
-        {/* <h1 className='font-bold text-xl mb-5'>List Penerima Bansos</h1> */}
         <div className="content-title-container flex mobile:block">
-          <h1 className="text-2xl font-semibold flex-1 mb-0 mobile:mb-2">List Penerima Bansos</h1>
-          <button type='button' className="w-1/3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-10" onClick={addForm} >Add</button>
+          <h1 className="text-xl font-semibold flex-1 mb-0 mobile:mb-2">List Penerima Bansos</h1>
+          <button type='button' className="w-1/4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-10" onClick={addForm} >Add</button>
         </div>
-        {/* <hr /> */}
         <>
           <div className="block min-w-full shadow rounded-lg overflow-x-auto whitespace-nowrap">
             <table className="min-w-full leading-normal">

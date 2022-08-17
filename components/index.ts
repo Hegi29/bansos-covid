@@ -4,6 +4,8 @@ import { Footer } from './Footer';
 import { FormBansos } from './FormBansos';
 import LoginLayout from './LoginLayout';
 import { MainLayout } from './MainLayout';
+import { ModalAlert } from './ModalAlert';
+import { ModalPreview } from './ModalPreview';
 
 export {
   Card,
@@ -11,5 +13,7 @@ export {
   Footer,
   FormBansos,
   LoginLayout,
-  MainLayout
+  MainLayout,
+  ModalAlert,
+  ModalPreview
 }

@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { DELAY_RESPONSE, MESSAGE_FAILED_API, MESSAGE_SUCCESS_API } from '~/constants/.';
-import { HttpStatus } from 'enum/httpStatus';
+import { HttpStatus } from 'enum/.';
 import { Response } from '~/types/.';
 import { getRandomNumber } from '~/utils/.';
 

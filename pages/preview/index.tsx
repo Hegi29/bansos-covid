@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { MainLayout } from '~/components/.';
 import { TITLE_FORM } from '~/constants/.';
-import { usePreview } from 'hooks/usePreview';
+import { usePreview } from 'hooks/.';
 import styles from '../../styles/Home.module.css';
 
 const Preview = () => {
