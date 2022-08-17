@@ -10,7 +10,8 @@ import { Reason } from '../enum/reason';
 import { useDataStore } from '~/utils/.';
 import styles from '../styles/Home.module.css';
 
-const URL_POST_DATA = "https://localhost:3000/api/simulate-post-data";
+const URL_POST_DATA = process.env.NEXT_URL_POST_DATA as string;
+const URL_GET_REASON = process.env.NEXT_URL_GET_REASON as string;
 
 const FormBansos = () => {
   const { addData } = useDataStore();
@@ -40,6 +41,7 @@ const FormBansos = () => {
   const [villages, setVillages] = useState([]);
   const [showOtherReason, setShowOtherReason] = useState(false);
   const [submitedData, setSubmitedData] = useState(false);
+  const [reasons, setReasons] = useState([]);
 
   useEffect(() => {
     fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`)
@@ -75,6 +77,14 @@ const FormBansos = () => {
       return;
     }
   }, [selectedDistrict])
+
+  useEffect(() => {
+    fetch(URL_GET_REASON)
+      .then(response => response.json())
+      .then(item => {
+        setReasons(item.payload);
+      });
+  }, [])
 
   const handleChangeProvince = ({ target }: any) => {
     setCities([]);
@@ -159,9 +169,7 @@ const FormBansos = () => {
           if (isSuccess) {
             localStorage.setItem('X-Data-Form', JSON.stringify(dataForm));
             addData(dataForm);
-            // setTimeout(() => {
             setSubmitedData(true);
-            // }, 2000);
           }
 
           alert(message);
@@ -464,10 +472,11 @@ const FormBansos = () => {
         <div className="md:w-2/3">
           <select {...register('alasan')} className={`appearance-none border-2 ${errors?.alasan ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white cursor-pointer`} id="alasan" onChange={(e) => handleChangeReason(e)}>
             <option value="">-</option>
-            <option value="Kehilangan pekerjaan">Kehilangan pekerjaan</option>
-            <option value="Kepala keluarga terdampak / korban Covid-19">Kepala keluarga terdampak / korban Covid-19</option>
-            <option value="Tergolong Fakir / Miskin semenjak sebelum Covid-19">Tergolong Fakir / Miskin semenjak sebelum Covid-19</option>
-            <option value="Lainnya">Lainnya</option>
+            {reasons && reasons.map((item: any) => {
+              return (
+                <option key={item.id} value={item.name}>{item.name}</option>
+              );
+            })}
           </select>
           {errors.alasan &&
             <small className="text-red-500">

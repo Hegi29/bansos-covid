@@ -1,4 +1,5 @@
 export type Response = {
   isSuccess: boolean,
-  message: string
+  message: string,
+  payload?: any
 }
