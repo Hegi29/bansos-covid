@@ -8,7 +8,7 @@ const Login = () => {
   return (
     <LoginLayout>
       <div className="min-h-screen flex justify-center items-center bg-blue-jds">
-        <div className="p-10 mt-10 rounded-lg shadow-lg flex flex-col items-center bg-white">
+        <div className="p-10 mt-10 rounded-lg md:shadow-lg flex flex-col items-center md:bg-white">
           <div className="py-8">
             <img alt="logo jds" width="260" className="-mt-10" src="logo-jds.png" />
           </div>

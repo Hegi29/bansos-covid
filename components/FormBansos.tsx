@@ -398,7 +398,7 @@ const FormBansos = ({ openModal, setMessage }: any) => {
       <div className={styles.buttonAction}>
         {!submitedData && <button disabled={disabled} type='submit' className={`w-1/3 ${!disabled ? 'bg-blue-500 hover:bg-blue-700' : 'bg-gray-500 hover:bg-gray-700 cursor-not-allowed'} text-white font-bold py-2 px-4 rounded mr-3`}>Submit</button>}
         {submitedData && <button type='button' className="w-1/3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-3" onClick={resetForm}>Isi Lagi</button>}
-        {!submitedData && <button type='button' className='w-1/3 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' onClick={preview}>Preview</button>}
+        {submitedData && <button type='button' className='w-1/3 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' onClick={preview}>Preview</button>}
       </div>
     </form >
   );
