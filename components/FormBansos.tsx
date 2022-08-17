@@ -10,8 +10,8 @@ import { Reason } from '../enum/reason';
 import { useDataStore } from '~/utils/.';
 import styles from '../styles/Home.module.css';
 
-const URL_POST_DATA = process.env.NEXT_URL_POST_DATA as string;
-const URL_GET_REASON = process.env.NEXT_URL_GET_REASON as string;
+const URL_POST_DATA = process.env.URL_POST_DATA as string;
+const URL_GET_REASON = process.env.URL_GET_REASON as string;
 
 const FormBansos = () => {
   const { addData } = useDataStore();
@@ -26,6 +26,14 @@ const FormBansos = () => {
     resolver: yupResolver(schema),
     mode: 'all',
   })
+
+  useEffect(() => {
+    console.log('x: ', URL_POST_DATA);
+  }, [])
+
+  useEffect(() => {
+    console.log('y: ', URL_GET_REASON);
+  }, [])
 
   const [disabled, setDisabled] = useState(true);
   const [provinces, setProvinces] = useState([]);
