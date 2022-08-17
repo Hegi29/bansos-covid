@@ -10,7 +10,7 @@ import { Reason } from '../enum/reason';
 import { useDataStore } from '~/utils/.';
 import styles from '../styles/Home.module.css';
 
-const URL_POST_DATA = "http://localhost:3000/api/simulate-post-data";
+const URL_POST_DATA = "https://localhost:3000/api/simulate-post-data";
 
 const FormBansos = () => {
   const { addData } = useDataStore();
@@ -42,14 +42,14 @@ const FormBansos = () => {
   const [submitedData, setSubmitedData] = useState(false);
 
   useEffect(() => {
-    fetch(`http://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`)
+    fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`)
       .then(response => response.json())
       .then(provinces => setProvinces(provinces));
   }, [])
 
   useEffect(() => {
     if (selectedProvince) {
-      fetch(`http://www.emsifa.com/api-wilayah-indonesia/api/regencies/${selectedProvince}.json`)
+      fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${selectedProvince}.json`)
         .then(response => response.json())
         .then(item => setCities(item));
       return;
@@ -60,7 +60,7 @@ const FormBansos = () => {
 
   useEffect(() => {
     if (selectedKabKota) {
-      fetch(`http://www.emsifa.com/api-wilayah-indonesia/api/districts/${selectedKabKota}.json`)
+      fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${selectedKabKota}.json`)
         .then(response => response.json())
         .then(item => setDistrict(item));
       return;
@@ -69,7 +69,7 @@ const FormBansos = () => {
 
   useEffect(() => {
     if (selectedDistrict) {
-      fetch(`http://www.emsifa.com/api-wilayah-indonesia/api/villages/${selectedDistrict}.json`)
+      fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/${selectedDistrict}.json`)
         .then(response => response.json())
         .then(item => setVillages(item));
       return;
