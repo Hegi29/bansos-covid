@@ -47,7 +47,10 @@ const schema = yup
     }),
     noKK: yup.number().transform((value) => {
       return isNaN(value) ? 0 : value
-    }).required("Silakan masukan No. KK").test("length", "No KK harus terdiri dari 16 angka", (value) => {
+    }).test("required", "Silakan masukan No KK", (value) => {
+      if (value && value > 0) return true;
+      return false;
+    }).test("length", "No KK harus terdiri dari 16 angka", (value) => {
       return validateIDNumber(value);
     }),
     fotoKTP: yup.mixed().test("required", "Silakan unggah foto KTP", (file) => {
