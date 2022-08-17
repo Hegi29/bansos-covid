@@ -1,21 +1,14 @@
-import { useState } from 'react';
+import { useFormPage } from 'hooks';
 import { FormBansos, MainLayout, ModalAlert } from '~/components/.';
 
 const Form = () => {
-  const [show, setShow] = useState(false);
-  const [message, setMessage] = useState("");
-
-  const handleOpenModal = () => {
-    setShow(true);
-  }
-
-  const handleCloseModal = () => {
-    setShow(false);
-  }
-
-  const handleMessage = (value: string) => {
-    setMessage(value);
-  }
+  const {
+    show,
+    message,
+    handleOpenModal,
+    handleCloseModal,
+    handleMessage
+  } = useFormPage();
 
   return (
     <MainLayout page="Form">

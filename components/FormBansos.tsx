@@ -87,7 +87,7 @@ const FormBansos = ({ openModal, setMessage }: any) => {
   );
 
   return (
-    <form onSubmit={handleSubmit(onSubmitClicked)} className="w-full p-6">
+    <form onSubmit={handleSubmit(onSubmitClicked)} className="sm:w-1/4 md:w-full p-6">
       <h1 className='font-bold text-xl mb-5'>{TITLE_FORM}</h1>
       <hr />
       <div className="md:flex md:items-center my-6">
