@@ -1,22 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import { useRouter } from 'next/router';
-
 import { MainLayout } from '~/components/.';
 import { TITLE_FORM } from '~/constants/.';
-import { useDataStore } from '~/utils/.';
+import { usePreview } from 'hooks/usePreview';
 import styles from '../../styles/Home.module.css';
 
 const Preview = () => {
-  const { data } = useDataStore();
-  const router = useRouter();
-
-  const inputForm = () => {
-    router.push("/form");
-  }
-
-  const logout = () => {
-    router.push("/");
-  }
+  const { data, inputForm, logout } = usePreview();
 
   return (
     <MainLayout page="Preview">

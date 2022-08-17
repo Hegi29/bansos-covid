@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 
 import { URL_POST_DATA } from '~/constants/api';
+import { KEY_DATA } from '../constants';
 import { useDataStore } from '../utils';
 
 const usePostData = (
@@ -40,7 +41,7 @@ const usePostData = (
         .then(response => response.json())
         .then(({ isSuccess, message }) => {
           if (isSuccess) {
-            localStorage.setItem('X-Data-Form', JSON.stringify(dataForm));
+            localStorage.setItem(KEY_DATA, JSON.stringify(dataForm));
             addData(dataForm);
             setSubmitedData(true);
           }

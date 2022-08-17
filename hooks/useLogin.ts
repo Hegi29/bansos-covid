@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
+import { KEY_DATA } from '../constants';
+
 const useLogin = () => {
   const navigate = useRouter();
 
@@ -9,12 +11,10 @@ const useLogin = () => {
   }
 
   useEffect(() => {
-    localStorage.removeItem('X-Data-Form');
+    localStorage.removeItem(KEY_DATA);
   }, [])
 
-  return {
-    handleLogin
-  }
+  return { handleLogin }
 }
 
 export { useLogin }

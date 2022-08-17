@@ -1,18 +1,18 @@
 import { Reason } from 'enum/reason';
 
 const useHandleChange = (
-  setCities: any,
-  setSelectedKabKota: any,
-  setDistrict: any,
-  setVillages: any,
-  setSelectedProvince: any,
-  setSelectedProvinceName: any,
-  setSelectedKabKotaName: any,
-  setSelectedDistrict: any,
-  setSelectedDistrictName: any,
-  setSelectedVillageName: any,
-  setShowOtherReason: any,
-  setDisabled: any
+  setCities: (_args: []) => void,
+  setSelectedKabKota: (_args: string) => void,
+  setDistrict: (_args: []) => void,
+  setVillages: (_args: []) => void,
+  setSelectedProvince: (_args: string) => void,
+  setSelectedProvinceName: (_args: string) => void,
+  setSelectedKabKotaName: (_args: string) => void,
+  setSelectedDistrict: (_args: string) => void,
+  setSelectedDistrictName: (_args: string) => void,
+  setSelectedVillageName: (_args: string) => void,
+  setShowOtherReason: (_args: boolean) => void,
+  setDisabled: (_args: boolean) => void
 ) => {
   const handleChangeProvince = ({ target }: any) => {
     setCities([]);

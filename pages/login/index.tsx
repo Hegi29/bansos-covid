@@ -1,22 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import { useLogin } from 'hooks/useLogin';
-import Head from 'next/head';
-
-import { TITLE_APP, META_DESC } from '~/constants/.';
+import { LoginLayout } from '~/components/.';
 
 const Login = () => {
   const { handleLogin } = useLogin();
 
   return (
-    <>
-      <Head>
-        <title>Login | {TITLE_APP}</title>
-        <meta name="description" content={META_DESC} />
-      </Head>
+    <LoginLayout>
       <div className="min-h-screen flex justify-center items-center bg-blue-jds">
         <div className="p-10 mt-10 rounded-lg shadow-lg flex flex-col items-center bg-white">
           <div className="py-8">
-            <img alt="" width="260" className="-mt-10" src="logo-jds.png" />
+            <img alt="logo jds" width="260" className="-mt-10" src="logo-jds.png" />
           </div>
           <input className=" mb-3 py-2 px-4 border-2 border-gray-200 rounded-lg w-80 focus:border-yellow-jds" placeholder="Email" />
           <div className="flex flex-col">
@@ -27,7 +21,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </>
+    </LoginLayout>
   )
 }
 

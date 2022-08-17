@@ -4,7 +4,7 @@ const enumReasonToArray = () => {
   let id = 0;
 
   return Object.values(Reason)
-    .filter((v) => isNaN(Number(v)))
+    .filter((item) => isNaN(Number(item)))
     .map((name) => {
       id++;
 

@@ -2,8 +2,16 @@ import { useEffect } from 'react';
 
 import { URL_GET_WILAYAH, URL_GET_REASON } from '~/constants/api';
 
-const useWilayah = (setProvinces: any, selectedProvince: any, setCities: any,
-  selectedKabKota: any, setDistrict: any, selectedDistrict: any, setVillages: any, setReasons: any) => {
+const useWilayah = (
+  setProvinces: (_args: []) => void,
+  selectedProvince: string,
+  setCities: (_args: []) => void,
+  selectedKabKota: string,
+  setDistrict: (_args: []) => void,
+  selectedDistrict: string,
+  setVillages: (_args: []) => void,
+  setReasons: (_args: []) => void
+) => {
   useEffect(() => {
     fetch(`${URL_GET_WILAYAH}/provinces.json`)
       .then(response => response.json())
@@ -26,7 +34,6 @@ const useWilayah = (setProvinces: any, selectedProvince: any, setCities: any,
       fetch(`${URL_GET_WILAYAH}/districts/${selectedKabKota}.json`)
         .then(response => response.json())
         .then(item => setDistrict(item));
-      return;
     }
   }, [selectedKabKota, setDistrict])
 
@@ -35,7 +42,6 @@ const useWilayah = (setProvinces: any, selectedProvince: any, setCities: any,
       fetch(`${URL_GET_WILAYAH}/villages/${selectedDistrict}.json`)
         .then(response => response.json())
         .then(item => setVillages(item));
-      return;
     }
   }, [selectedDistrict, setVillages])
 

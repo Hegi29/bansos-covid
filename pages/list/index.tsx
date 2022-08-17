@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import { MainLayout } from '~/components/MainLayout';
+import { MainLayout } from '~/components/.';
+import { KEY_DATA } from '~/constants/.';
 
 const List = () => {
   const router = useRouter();
@@ -11,7 +12,7 @@ const List = () => {
   }
 
   useEffect(() => {
-    const data = localStorage.getItem('X-Data-Form');
+    const data = localStorage.getItem(KEY_DATA);
     console.log('data', data)
   }, [])
 

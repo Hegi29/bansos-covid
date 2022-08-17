@@ -6,6 +6,7 @@ import { Confirmation } from './Confirmation';
 import { TITLE_FORM } from '../constants';
 import { useHandleChange, usePostData, useWilayah } from 'hooks';
 import { schema } from './schema';
+import { validateMaxInputNumber } from '~/utils/.';
 import styles from '../styles/Home.module.css';
 
 const FormBansos = () => {
@@ -82,11 +83,6 @@ const FormBansos = () => {
     reset,
     setDisabled
   );
-
-  const validateMaxInputNumber = (e: any, max: number) => {
-    e.target.value = e.target.value.slice(0, max);
-    return e;
-  }
 
   return (
     <form onSubmit={handleSubmit(onSubmitClicked)} className="w-full p-6">
