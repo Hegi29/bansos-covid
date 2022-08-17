@@ -1,36 +1,74 @@
 import * as yup from 'yup';
 
 import { Reason } from '../enum/reason';
-import { bytesToMegaBytes } from '../utils/bytesToMegaBytes';
+import { bytesToMegaBytes } from '../utils/.';
+
+const MAX_SIZE_FILE = 2; // MB
+const LENGTH_NO_ID = 16;
+const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/bmp", "image/png"];
+
+const validateIDNumber = (value: number | undefined) => {
+  const length = value?.toString().length;
+  if (length === LENGTH_NO_ID) {
+    return true;
+  }
+
+  return false;
+}
+
+const validateFileSize = (file: FileList) => {
+  if (file.length > 0) {
+    const size = bytesToMegaBytes(file[0].size);
+    return size < MAX_SIZE_FILE;
+  }
+
+  return false;
+}
+
+const validateFileType = (file: FileList) => {
+  if (file.length > 0) {
+    const type = file[0].type;
+    return SUPPORTED_FORMATS.includes(type);
+  }
+
+  return false;
+}
 
 const schema = yup
   .object({
     nama: yup.string().required("Silakan masukan nama"),
-    nik: yup.string().required("Silakan masukan NIK"),
-    noKK: yup.string().required("Silakan masukan No. KK"),
+    nik: yup.number().transform((value) => {
+      return isNaN(value) ? 0 : value
+    }).test("required", "Silakan masukan NIK", (value) => {
+      if (value && value > 0) return true;
+      return false;
+    }).test("length", "NIK harus terdiri dari 16 angka", (value) => {
+      return validateIDNumber(value);
+    }),
+    noKK: yup.number().transform((value) => {
+      return isNaN(value) ? 0 : value
+    }).required("Silakan masukan No. KK").test("length", "No KK harus terdiri dari 16 angka", (value) => {
+      return validateIDNumber(value);
+    }),
     fotoKTP: yup.mixed().test("required", "Silakan unggah foto KTP", (file) => {
       if (file[0]) return true;
       return false;
     })
       .test("fileSize", "File terlalu besar (maks. 2MB)", (file) => {
-        if (file.length > 0) {
-          const size = bytesToMegaBytes(file[0].size);
-          return size < 2;
-        }
-
-        return false;
+        return validateFileSize(file);
+      })
+      .test("fileFormat", "Format file hanya boleh JPG/JPEG/PNG/BMP", (file) => {
+        return validateFileType(file);
       }),
     fotoKK: yup.mixed().test("required", "Silakan unggah foto KK", (file) => {
       if (file[0]) return true;
       return false;
     })
       .test("fileSize", "File terlalu besar (maks. 2MB)", (file) => {
-        if (file.length > 0) {
-          const size = bytesToMegaBytes(file[0].size);
-          return size < 2;
-        }
-
-        return false;
+        return validateFileSize(file);
+      })
+      .test("fileFormat", "Format file hanya boleh JPG/JPEG/PNG/BMP", (file) => {
+        return validateFileType(file);
       }),
     umur: yup.number().transform((value) => {
       return isNaN(value) ? 0 : value

@@ -1,21 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { TITLE_FORM } from '../constants';
 import { Confirmation } from './Confirmation';
+import { TITLE_FORM } from '../constants';
+import { useHandleChange, usePostData, useWilayah } from 'hooks';
 import { schema } from './schema';
-import { Reason } from '../enum/reason';
-import { useDataStore } from '~/utils/.';
 import styles from '../styles/Home.module.css';
 
-const URL_POST_DATA = process.env.URL_POST_DATA as string;
-const URL_GET_REASON = process.env.URL_GET_REASON as string;
-
 const FormBansos = () => {
-  const { addData } = useDataStore();
-  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -26,14 +19,6 @@ const FormBansos = () => {
     resolver: yupResolver(schema),
     mode: 'all',
   })
-
-  useEffect(() => {
-    console.log('x: ', URL_POST_DATA);
-  }, [])
-
-  useEffect(() => {
-    console.log('y: ', URL_GET_REASON);
-  }, [])
 
   const [disabled, setDisabled] = useState(true);
   const [provinces, setProvinces] = useState([]);
@@ -51,148 +36,56 @@ const FormBansos = () => {
   const [submitedData, setSubmitedData] = useState(false);
   const [reasons, setReasons] = useState([]);
 
-  useEffect(() => {
-    fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`)
-      .then(response => response.json())
-      .then(provinces => setProvinces(provinces));
-  }, [])
+  useWilayah(
+    setProvinces,
+    selectedProvince,
+    setCities,
+    selectedKabKota,
+    setDistrict,
+    selectedDistrict,
+    setVillages,
+    setReasons
+  );
+  const {
+    handleChangeProvince,
+    handleChangeKabKota,
+    handleChangeDistrict,
+    handleChangeVillage,
+    handleChangeReason,
+    handleUnderstand
+  } = useHandleChange(
+    setCities,
+    setSelectedKabKota,
+    setDistrict,
+    setVillages,
+    setSelectedProvince,
+    setSelectedProvinceName,
+    setSelectedKabKotaName,
+    setSelectedDistrict,
+    setSelectedDistrictName,
+    setSelectedVillageName,
+    setShowOtherReason,
+    setDisabled
+  );
+  const {
+    onSubmitClicked,
+    resetForm,
+    preview
+  } = usePostData(
+    isValid,
+    getValues,
+    selectedProvinceName,
+    selectedKabKotaName,
+    selectedDistrictName,
+    selectedVillageName,
+    setSubmitedData,
+    reset,
+    setDisabled
+  );
 
-  useEffect(() => {
-    if (selectedProvince) {
-      fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${selectedProvince}.json`)
-        .then(response => response.json())
-        .then(item => setCities(item));
-      return;
-    }
-
-    setProvinces([]);
-  }, [selectedProvince])
-
-  useEffect(() => {
-    if (selectedKabKota) {
-      fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${selectedKabKota}.json`)
-        .then(response => response.json())
-        .then(item => setDistrict(item));
-      return;
-    }
-  }, [selectedKabKota])
-
-  useEffect(() => {
-    if (selectedDistrict) {
-      fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/${selectedDistrict}.json`)
-        .then(response => response.json())
-        .then(item => setVillages(item));
-      return;
-    }
-  }, [selectedDistrict])
-
-  useEffect(() => {
-    fetch(URL_GET_REASON)
-      .then(response => response.json())
-      .then(item => {
-        setReasons(item.payload);
-      });
-  }, [])
-
-  const handleChangeProvince = ({ target }: any) => {
-    setCities([]);
-    setSelectedKabKota("");
-    setDistrict([]);
-    setVillages([]);
-
-    if (target.value) {
-      const data = target.value.split('::');
-      setSelectedProvince(data[0]);
-      setSelectedProvinceName(data[1]);
-      return;
-    }
-  }
-
-  const handleChangeKabKota = ({ target }: any) => {
-    setDistrict([]);
-    setVillages([]);
-
-    if (target.value) {
-      const data = target.value.split('::');
-      setSelectedKabKota(data[0]);
-      setSelectedKabKotaName(data[1]);
-      return;
-    }
-  }
-
-  const handleChangeDistrict = ({ target }: any) => {
-    setVillages([]);
-
-    if (target.value) {
-      const data = target.value.split('::');
-      setSelectedDistrict(data[0]);
-      setSelectedDistrictName(data[1]);
-      return;
-    }
-  }
-
-  const handleChangeVillage = ({ target }: any) => {
-    if (target.value) {
-      const data = target.value.split('::');
-      setSelectedVillageName(data[1]);
-      return;
-    }
-  }
-
-  const handleChangeReason = ({ target }: any) => {
-    if (target.value === Reason.Lainnya) {
-      setShowOtherReason(true);
-      return;
-    }
-
-    setShowOtherReason(false);
-  }
-
-  const handleUnderstand = ({ target }: any) => {
-    setDisabled(!target.checked);
-  }
-
-  const onSubmitClicked = () => {
-    if (isValid) {
-      const dataForm = getValues();
-      dataForm.namaProvinsi = selectedProvinceName;
-      dataForm.namaKabupatenKota = selectedKabKotaName;
-      dataForm.namaKecamatan = selectedDistrictName;
-      dataForm.namaKelurahanDesa = selectedVillageName;
-
-      fetch(URL_POST_DATA, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
-        body: JSON.stringify(dataForm)
-      })
-        .then(response => response.json())
-        .then(({ isSuccess, message }) => {
-          if (isSuccess) {
-            localStorage.setItem('X-Data-Form', JSON.stringify(dataForm));
-            addData(dataForm);
-            setSubmitedData(true);
-          }
-
-          alert(message);
-        });
-    }
-  }
-
-  const resetForm = () => {
-    reset();
-    setSubmitedData(false);
-    setDisabled(false);
-  }
-
-  const preview = () => {
-    router.push('/preview');
+  const validateMaxInputNumber = (e: any, max: number) => {
+    e.target.value = e.target.value.slice(0, max);
+    return e;
   }
 
   return (
@@ -221,7 +114,7 @@ const FormBansos = () => {
           </label>
         </div>
         <div className="md:w-2/3">
-          <input {...register('nik')} className={`appearance-none border-2 ${errors?.nik ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="nik" type="text" />
+          <input {...register('nik')} className={`appearance-none border-2 ${errors?.nik ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="nik" type="number" onInput={(e: any) => validateMaxInputNumber(e, 16)} />
           {errors.nik &&
             <small className="text-red-500">
               {errors?.nik?.message as string}
@@ -236,7 +129,7 @@ const FormBansos = () => {
           </label>
         </div>
         <div className="md:w-2/3">
-          <input {...register('noKK')} className={`appearance-none border-2 ${errors?.noKK ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="no-kk" type="text" />
+          <input {...register('noKK')} className={`appearance-none border-2 ${errors?.noKK ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="no-kk" type="number" onInput={(e: any) => validateMaxInputNumber(e, 16)} />
           {errors.noKK &&
             <small className="text-red-500">
               {errors?.noKK?.message as string}
@@ -281,7 +174,7 @@ const FormBansos = () => {
           </label>
         </div>
         <div className="md:w-1/3">
-          <input {...register('umur')} className={`appearance-none border-2 ${errors?.umur ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="umur" type="number" min={1} />
+          <input {...register('umur')} className={`appearance-none border-2 ${errors?.umur ? 'border-red-500' : 'border-gray-200 focus:border-yellow-jds'} rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white`} id="umur" type="number" min={1} onInput={(e: any) => validateMaxInputNumber(e, 2)} />
           {errors.umur &&
             <small className="text-red-500">
               {errors?.umur?.message as string}

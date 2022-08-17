@@ -1,20 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
+import { useLogin } from 'hooks/useLogin';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 import { TITLE_APP, META_DESC } from '~/constants/.';
 
 const Login = () => {
-  const navigate = useRouter();
-
-  const handleLogin = () => {
-    navigate.push('/form');
-  }
-
-  useEffect(() => {
-    localStorage.removeItem('X-Data-Form');
-  }, [])
+  const { handleLogin } = useLogin();
 
   return (
     <>
