@@ -22,10 +22,6 @@ const FormBansos = ({ openModal, setMessage }: any) => {
     mode: 'all',
   });
 
-  useEffect(() => {
-    console.log('errors: ', errors)
-  }, [errors]);
-
   const [disabled, setDisabled] = useState(true);
   const [provinces, setProvinces] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState("");
