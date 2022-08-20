@@ -1,8 +1,5 @@
 import { TERM_OF_RESPONSIBILITY } from '~/constants/.';
-
-interface ConfirmationProps {
-  handleUnderstand: (_args: any) => void;
-}
+import { ConfirmationProps } from '../interfaces';
 
 const Confirmation = ({ handleUnderstand }: ConfirmationProps) => {
   return (

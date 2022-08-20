@@ -7,12 +7,8 @@ import { TITLE_FORM } from '~/constants/.';
 import { useHandleChange, usePostData, useWilayah } from '~/hooks/.';
 import { schema } from '../schema';
 import { validateMaxInputNumber } from '~/utils/.';
+import { FormBansosProps } from '../interfaces';
 import styles from '~/styles/Home.module.css';
-
-interface FormBansosProps {
-  openModal: () => void,
-  setMessage: (_arg: string) => void
-}
 
 const FormBansos = ({ openModal, setMessage }: FormBansosProps) => {
   const {

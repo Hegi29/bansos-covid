@@ -1,14 +1,10 @@
-import Head from 'next/head'
+import Head from 'next/head';
 
-import { TITLE_APP } from '~/constants/.'
-import { Card } from './Card'
-import { Footer } from './Footer'
-import styles from '~/styles/Home.module.css'
-
-interface LayoutProps {
-  page: string;
-  children: React.ReactNode
-}
+import { TITLE_APP } from '~/constants/.';
+import { Card } from './Card';
+import { Footer } from './Footer';
+import { LayoutProps } from '../interfaces';
+import styles from '~/styles/Home.module.css';
 
 const MainLayout = ({ page, children }: LayoutProps) => {
   return (

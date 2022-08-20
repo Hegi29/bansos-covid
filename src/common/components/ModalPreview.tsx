@@ -1,9 +1,6 @@
-interface ModalPreviewProps {
-  showModal: boolean, closeModal: () => void, props: any
-}
+import { ModalProps } from '../interfaces';
 
-const ModalPreview = ({ showModal, closeModal, props }: ModalPreviewProps) => {
-
+const ModalPreview = ({ showModal, closeModal, props }: ModalProps) => {
   return (
     <>
       {showModal &&
