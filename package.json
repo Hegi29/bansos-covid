@@ -1,6 +1,7 @@
 {
   "name": "bansos-covid",
   "version": "0.1.0",
+  "author": "Hegi Tri Saputra",
   "private": true,
   "scripts": {
     "dev": "next dev",

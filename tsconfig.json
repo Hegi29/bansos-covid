@@ -21,16 +21,25 @@
     "baseUrl": ".",
     "paths": {
       "~/components/*": [
-        "./components/*"
+        "./src/common/components/*"
       ],
       "~/constants/*": [
-        "./constants/*"
+        "./src/common/constants/*"
       ],
       "~/utils/*": [
-        "./utils/*"
+        "./src/common/utils/*"
       ],
       "~/types/*": [
-        "./types/*"
+        "./src/common/types/*"
+      ],
+      "~/styles/*": [
+        "./src/common/styles/*"
+      ],
+      "~/enum/*": [
+        "./src/common/enum/*"
+      ],
+      "~/hooks/*": [
+        "./src/common/hooks/*"
       ]
     }
   },

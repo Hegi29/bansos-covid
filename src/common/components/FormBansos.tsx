@@ -4,10 +4,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Confirmation } from './Confirmation';
 import { TITLE_FORM } from '../constants';
-import { useHandleChange, usePostData, useWilayah } from 'hooks';
+import { useHandleChange, usePostData, useWilayah } from '~/hooks/.';
 import { schema } from './schema';
 import { validateMaxInputNumber } from '~/utils/.';
-import styles from '../styles/Home.module.css';
+import styles from '~/styles/Home.module.css';
+import { useEffect } from 'react';
 
 const FormBansos = ({ openModal, setMessage }: any) => {
   const {
@@ -19,7 +20,11 @@ const FormBansos = ({ openModal, setMessage }: any) => {
   } = useForm({
     resolver: yupResolver(schema),
     mode: 'all',
-  })
+  });
+
+  useEffect(() => {
+    console.log('errors: ', errors)
+  }, [errors]);
 
   const [disabled, setDisabled] = useState(true);
   const [provinces, setProvinces] = useState([]);
@@ -47,6 +52,7 @@ const FormBansos = ({ openModal, setMessage }: any) => {
     setVillages,
     setReasons
   );
+
   const {
     handleChangeProvince,
     handleChangeKabKota,
@@ -68,6 +74,7 @@ const FormBansos = ({ openModal, setMessage }: any) => {
     setShowOtherReason,
     setDisabled
   );
+
   const {
     onSubmitClicked,
     resetForm,

@@ -1,4 +1,4 @@
-import { Reason } from 'enum/reason';
+import { Reason } from '~/enum/.';
 
 const useHandleChange = (
   setCities: (_args: []) => void,

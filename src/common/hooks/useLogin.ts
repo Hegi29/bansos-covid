@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import { KEY_DATA } from '../constants';
+import { KEY_DATA } from '~/constants/.';
 
 const useLogin = () => {
   const navigate = useRouter();

@@ -1,20 +1,8 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-
 import { MainLayout } from '~/components/.';
-import { KEY_DATA } from '~/constants/.';
+import { useList } from '~/hooks/.';
 
 const List = () => {
-  const router = useRouter();
-
-  const addForm = () => {
-    router.push('/form');
-  }
-
-  useEffect(() => {
-    const data = localStorage.getItem(KEY_DATA);
-    console.log('data', data)
-  }, [])
+  const { addForm } = useList();
 
   return (
     <MainLayout page="List">

@@ -1,9 +1,7 @@
-import { Reason } from 'enum/.';
-
-const enumReasonToArray = () => {
+const enumToArray = (data: any) => {
   let id = 0;
 
-  return Object.values(Reason)
+  return Object.values(data)
     .filter((item) => isNaN(Number(item)))
     .map((name) => {
       id++;
@@ -15,4 +13,4 @@ const enumReasonToArray = () => {
     });
 }
 
-export { enumReasonToArray }
+export { enumToArray }

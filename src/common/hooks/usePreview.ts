@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { useDataStore } from '../utils';
+import { useDataStore } from '~/utils/.';
 
 const usePreview = () => {
   const { data } = useDataStore();

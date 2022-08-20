@@ -1,5 +1,5 @@
-import { URL_LINKEDIN } from '../constants';
-import styles from '../styles/Home.module.css'
+import { URL_LINKEDIN } from '~/constants/.';
+import styles from '~/styles/Home.module.css'
 
 const Footer = () => {
   return (

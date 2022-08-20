@@ -1,12 +1,12 @@
 import { bytesToMegaBytes } from './bytesToMegaBytes';
-import { enumReasonToArray } from './enumReasonToArray';
+import { enumToArray } from './enumToArray';
 import { getRandomNumber } from './getRandomNumber';
 import { useDataStore } from './useDataStore';
 import { validateMaxInputNumber } from './validateMaxInputNumber';
 
 export {
   bytesToMegaBytes,
-  enumReasonToArray,
+  enumToArray,
   getRandomNumber,
   useDataStore,
   validateMaxInputNumber

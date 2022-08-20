@@ -1,5 +1,5 @@
-import { useFormPage } from 'hooks';
 import { FormBansos, MainLayout, ModalAlert } from '~/components/.';
+import { useFormPage } from '~/hooks/.';
 
 const Form = () => {
   const {

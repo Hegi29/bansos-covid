@@ -1,4 +1,4 @@
-import { TERM_OF_RESPONSIBILITY } from '../constants';
+import { TERM_OF_RESPONSIBILITY } from '~/constants/.';
 
 const Confirmation = ({ handleUnderstand }: any) => {
   return (
