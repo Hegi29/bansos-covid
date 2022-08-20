@@ -5,7 +5,12 @@ import { Card } from './Card'
 import { Footer } from './Footer'
 import styles from '~/styles/Home.module.css'
 
-const MainLayout = ({ page, children }: any) => {
+interface LayoutProps {
+  page: string;
+  children: React.ReactNode
+}
+
+const MainLayout = ({ page, children }: LayoutProps) => {
   return (
     <>
       <Head>

@@ -1,4 +1,8 @@
-const ModalAlert = ({ showModal, closeModal, message }: any) => {
+interface ModalAlertProps {
+  showModal: boolean, closeModal: () => void, message: string
+}
+
+const ModalAlert = ({ showModal, closeModal, message }: ModalAlertProps) => {
   return (
     <>
       {showModal &&

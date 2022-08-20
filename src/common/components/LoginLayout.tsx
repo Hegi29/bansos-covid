@@ -3,7 +3,11 @@ import Head from 'next/head';
 
 import { TITLE_APP, META_DESC } from '~/constants/.';
 
-const LoginLayout = ({ children }: any) => {
+interface LoginProps {
+  children: React.ReactNode
+}
+
+const LoginLayout = ({ children }: LoginProps) => {
   return (
     <>
       <Head>

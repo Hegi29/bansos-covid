@@ -3,14 +3,18 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Confirmation } from './Confirmation';
-import { TITLE_FORM } from '../constants';
+import { TITLE_FORM } from '~/constants/.';
 import { useHandleChange, usePostData, useWilayah } from '~/hooks/.';
-import { schema } from './schema';
+import { schema } from '../schema';
 import { validateMaxInputNumber } from '~/utils/.';
 import styles from '~/styles/Home.module.css';
-import { useEffect } from 'react';
 
-const FormBansos = ({ openModal, setMessage }: any) => {
+interface FormBansosProps {
+  openModal: () => void,
+  setMessage: (_arg: string) => void
+}
+
+const FormBansos = ({ openModal, setMessage }: FormBansosProps) => {
   const {
     register,
     handleSubmit,

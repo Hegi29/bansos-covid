@@ -1,5 +1,8 @@
-const ModalPreview = ({ showModal, closeModal, props }: any) => {
-  console.log('props', props);
+interface ModalPreviewProps {
+  showModal: boolean, closeModal: () => void, props: any
+}
+
+const ModalPreview = ({ showModal, closeModal, props }: ModalPreviewProps) => {
 
   return (
     <>

@@ -1,6 +1,10 @@
 import { TERM_OF_RESPONSIBILITY } from '~/constants/.';
 
-const Confirmation = ({ handleUnderstand }: any) => {
+interface ConfirmationProps {
+  handleUnderstand: (_args: any) => void;
+}
+
+const Confirmation = ({ handleUnderstand }: ConfirmationProps) => {
   return (
     <div className="flex justify-center mt-10">
       <div className="form-check flex">

@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 
 import { URL_POST_DATA } from '~/constants/api';
-import { KEY_DATA } from '../constants';
-import { useDataStore } from '../utils';
+import { KEY_DATA } from '~/constants/.';
+import { useDataStore } from '~/utils/.';
 
 const usePostData = (
   isValid: boolean,

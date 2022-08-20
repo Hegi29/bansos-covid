@@ -1,45 +1,14 @@
 import * as yup from 'yup';
 
 import { Reason } from '~/enum/.';
-import { bytesToMegaBytes } from '~/utils/.';
-
-const MAX_SIZE_FILE = 2; // MB
-const LENGTH_NO_ID = 16;
-const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/bmp", "image/png"];
-
-const validateIDNumber = (value: number | undefined) => {
-  const length = value?.toString().length;
-  if (length === LENGTH_NO_ID) {
-    return true;
-  }
-
-  return false;
-}
-
-const validateFileSize = (file: FileList) => {
-  if (file.length > 0) {
-    const size = bytesToMegaBytes(file[0].size);
-    return size < MAX_SIZE_FILE;
-  }
-
-  return false;
-}
-
-const validateFileType = (file: FileList) => {
-  if (file.length > 0) {
-    const type = file[0].type;
-    return SUPPORTED_FORMATS.includes(type);
-  }
-
-  return false;
-}
+import { validateFileSize, validateFileType, validateIDNumber } from './utils/validateFile';
 
 const schema = yup
   .object({
     nama: yup.string().required("Silakan masukan nama"),
     nik: yup.number().transform((value) => {
       return isNaN(value) ? 0 : value
-    }).test("required", "Silakan masukan NIK", (value) => {
+    }).positive("NIK tidak boleh mengandung - atau berakhiran .").test("required", "Silakan masukan NIK", (value) => {
       if (value && value > 0) return true;
       return false;
     }).test("length", "NIK harus terdiri dari 16 angka", (value) => {
@@ -47,7 +16,7 @@ const schema = yup
     }),
     noKK: yup.number().transform((value) => {
       return isNaN(value) ? 0 : value
-    }).test("required", "Silakan masukan No KK", (value) => {
+    }).positive("No KK tidak boleh mengandung - atau berakhiran .").test("required", "Silakan masukan No KK", (value) => {
       if (value && value > 0) return true;
       return false;
     }).test("length", "No KK harus terdiri dari 16 angka", (value) => {
@@ -102,13 +71,13 @@ const schema = yup
     }),
     penghasilanSebelum: yup.number().transform((value) => {
       return isNaN(value) ? 0 : value;
-    }).test("required", "Silakan masukan penghasilan sebelum pandemi", (value) => {
+    }).positive("Penghasilan tidak boleh mengandung - atau berakhiran .").test("required", "Silakan masukan penghasilan sebelum pandemi", (value) => {
       if (value && value > 0) return true;
       return false;
     }),
     penghasilanSesudah: yup.number().transform((value) => {
       return isNaN(value) ? 0 : value;
-    }).test("required", "Silakan masukan penghasilan sesudah pandemi", (value) => {
+    }).positive("Penghasilan tidak boleh mengandung - atau berakhiran .").test("required", "Silakan masukan penghasilan sesudah pandemi", (value) => {
       if (value && value > 0) return true;
       return false;
     }),
